@@ -65,10 +65,8 @@
           var natureDiv = $("<div class='nature'>");
 
           // Storing the rating data
-          for (var i=0; i<11; i++){
-            var rating = response.data[i].rating;
-          }
-          // var rating = response.data[i].rating;
+
+          var rating = response.data[0].rating;
 
           // Creating an element to have the rating displayed
           var pOne = $("<p>").text("Rating: " + rating);
