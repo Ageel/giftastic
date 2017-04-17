@@ -61,48 +61,59 @@
           method: "GET"
         }).done(function(response) {
 
-          // Creating a div to hold the movie
-          var natureDiv = $("<div class='nature'>");
+          console.log(queryURL);
+          console.log(response);
+          // storing the data from the AJAX request in the results variable
+          var results = response.data;
+            var natureDiv = $("<div class='nature'>");
 
-          // Storing the rating data
+          // Looping through each result item
+          for (var i = 0; i < results.length; i++) {
+            // Creating and storing a div tag
+            var natureDiv = $("<div class='nature'>");
+            // Creating a paragraph tag with the result item's rating
+            var p = $("<p>").text("Rating: " + results[i].rating);
+            // Creating and storing an image tag
+            var natureImage = $("<img>");
+            // Setting the src attribute of the image to a property pulled off the result item
+            natureImage.attr("src", results[i].images.fixed_height.url);
+            // Appending the paragraph and image tag to the animalDiv
+            natureDiv.append(p);
+            natureDiv.append(natureImage);
+            // Prependng the animalDiv to the HTML page in the "#gifs-appear-here" div
+            $("#nature-view").prepend(natureDiv);
+          }
 
-          var rating = response.data[0].rating;
 
-          // Creating an element to have the rating displayed
-          var pOne = $("<p>").text("Rating: " + rating);
 
-          // Displaying the rating
-          natureDiv.append(pOne);
 
-          // // Storing the release year
-          // var released = response.Released;
 
-          // // Creating an element to hold the release year
-          // var pTwo = $("<p>").text("Released: " + released);
+          // // Creating a div to hold the movie
+          // var natureDiv = $("<div class='nature'>");
 
-          // // Displaying the release year
-          // natureDiv.append(pTwo);
+          // // Storing the rating data
 
-          // // Storing the plot
-          // var plot = response.Plot;
+          // var rating = response.data[0].rating;
 
-          // // Creating an element to hold the plot
-          // var pThree = $("<p>").text("Plot: " + plot);
+          // // Creating an element to have the rating displayed
+          // var pOne = $("<p>").text("Rating: " + rating);
 
-          // // Appending the plot
-          // natureDiv.append(pThree);
+          // // Displaying the rating
+          // natureDiv.append(pOne);
 
-          // Retrieving the URL for the image
-          var imgURL = response.data[0].images.fixed_height.url;
+        
 
-          // Creating an element to hold the image
-          var image = $("<img>").attr("src", imgURL);
+          // // Retrieving the URL for the image
+          // var imgURL = response.data[0].images.fixed_height.url;
 
-          // Appending the image
-          natureDiv.append(image);
+          // // Creating an element to hold the image
+          // var image = $("<img>").attr("src", imgURL);
 
-          // Putting the entire movie above the previous movies
-          $("#nature-view").prepend(natureDiv);
+          // // Appending the image
+          // natureDiv.append(image);
+
+          // // Putting the entire movie above the previous movies
+          // $("#nature-view").prepend(natureDiv);
         });
 
       }
